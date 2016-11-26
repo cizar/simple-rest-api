@@ -1,8 +1,6 @@
 import { Router } from 'express'
-import itemsRoute from './routes/items'
+import * as routes from './routes'
 
-const router = Router()
-
-router.use('/items', itemsRoute)
-
-export default router
+export default Object.keys(routes).reduce((router, route) => 
+  router.use(`/${route}`, routes[route])
+, Router())
